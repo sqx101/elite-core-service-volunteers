@@ -1,14 +1,17 @@
 # Elite Core Cup — Volunteer Sign Up
 
-Volunteer signup app for the **Elite Core Cup Mardi Gras 2026** gymnastics event. Volunteers can sign up for setup (Thursday, Feb 26) and/or takedown (Sunday, Mar 1), with 15 spots per day.
+**Live:** [elite-core-service-volunteers.vercel.app](https://elite-core-service-volunteers.vercel.app)
+
+Volunteer signup app for the **Elite Core Cup Mardi Gras 2026** gymnastics event at Elite Core Gymnastics (999 W Main St, West Dundee, IL). Volunteers can sign up for setup (Thursday, Feb 26) and/or takedown (Sunday, Mar 1), with 15 spots per day.
 
 ## Features
 
-- Volunteer signup with live spot counter (15 max per day)
-- Confirmation page with Google Calendar links and map directions
+- Volunteer signup with live spot counter and progress bars (15 max per day)
+- Name validation before submission
+- Confirmation page with Google Calendar links, map directions, share link, and email reminder
 - Admin dashboard (password-protected) to view and manage signups
 - Firebase Realtime Database for persistence
-- Deployed to Vercel
+- Deployed to Vercel with auto-deploy on push
 
 ## Tech Stack
 
@@ -48,13 +51,10 @@ VITE_FIREBASE_PROJECT_ID=
 VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
+VITE_ADMIN_CODE=
 ```
 
-### 4. Logo
-
-Place your event logo at `public/logo.jpg`.
-
-### 5. Run locally
+### 4. Run locally
 
 ```bash
 npm run dev
@@ -64,9 +64,10 @@ npm run dev
 
 1. Push to GitHub
 2. Import the repo in [Vercel](https://vercel.com)
-3. Add the `VITE_FIREBASE_*` environment variables in the Vercel project settings
-4. Deploy
+3. Vercel auto-detects Vite — no build config needed
+4. Add all `VITE_*` environment variables in the Vercel project settings
+5. Deploy — future pushes to `main` auto-deploy
 
 ## Admin Access
 
-On the signup page, click the gear icon at the bottom and enter the admin code to access the dashboard.
+On the signup page, click **"Admin Access"** at the bottom and enter the admin code (`VITE_ADMIN_CODE`) to view/manage signups.
