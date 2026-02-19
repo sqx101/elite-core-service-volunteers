@@ -233,12 +233,12 @@ export default function App() {
             {submittedDays.includes('thursday') && (
               <div className="bg-fuchsia-50 rounded-lg p-3">
                 <p className="text-fuchsia-700 font-medium mb-2">📅 Thursday, Feb 26 • 5-9 PM • SETUP</p>
-                <div className="flex gap-2">
+                <div className="flex gap-2 justify-center">
                   <a
                     href={thursdayCalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm bg-fuchsia-600 text-white px-3 py-1.5 rounded-full hover:bg-fuchsia-700"
+                    className="inline-flex items-center gap-1 text-sm bg-fuchsia-100 text-fuchsia-700 px-3 py-1.5 rounded-full hover:bg-fuchsia-200"
                   >
                     📆 Google Cal
                   </a>
@@ -254,12 +254,12 @@ export default function App() {
             {submittedDays.includes('sunday') && (
               <div className="bg-violet-50 rounded-lg p-3">
                 <p className="text-violet-700 font-medium mb-2">📅 Sunday, Mar 1 • 6-9 PM • TAKEDOWN</p>
-                <div className="flex gap-2">
+                <div className="flex gap-2 justify-center">
                   <a
                     href={sundayCalUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm bg-violet-600 text-white px-3 py-1.5 rounded-full hover:bg-violet-700"
+                    className="inline-flex items-center gap-1 text-sm bg-violet-100 text-violet-700 px-3 py-1.5 rounded-full hover:bg-violet-200"
                   >
                     📆 Google Cal
                   </a>
@@ -319,7 +319,7 @@ export default function App() {
               )}`}
               className="flex-1 py-2.5 rounded-lg border-2 border-violet-200 text-violet-600 font-medium hover:bg-violet-50 transition-colors text-sm text-center"
             >
-              ✉️ Email Reminder
+              ✉️ Email Yourself a Reminder
             </a>
           </div>
 
