@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import { loadSignups, saveSignups } from './firebase';
 
 function downloadIcs(title, start, end, location, description) {
@@ -126,6 +127,44 @@ export default function App() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-fuchsia-900 via-purple-900 to-violet-900 flex items-center justify-center">
         <div className="text-white text-xl animate-pulse">Loading...</div>
+      </div>
+    );
+  }
+
+  // ============ QR CTA VIEW ============
+  if (new URLSearchParams(window.location.search).has('qr')) {
+    const siteUrl = window.location.origin + window.location.pathname;
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-fuchsia-900 via-purple-900 to-violet-900 p-4 flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
+          <img
+            src="/logo.png"
+            alt="Elite Core Cup 2026"
+            className="w-24 h-24 mx-auto mb-4 object-contain rounded-full"
+          />
+          <h1 className="text-2xl font-bold text-gray-800 mb-1">Volunteer Service Hours</h1>
+          <p className="text-fuchsia-600 font-semibold mb-4">Elite Core Cup Mardi Gras 2026</p>
+
+          <div className="bg-gray-50 rounded-xl p-4 mb-4 text-sm text-gray-600 text-left space-y-1">
+            <p>📅 <strong>Setup:</strong> Thu, Feb 26 • 5-9 PM</p>
+            <p>📅 <strong>Takedown:</strong> Sun, Mar 1 • 6-9 PM</p>
+            <p>📍 Elite Core Gymnastics, West Dundee</p>
+            <p>🍕 Food & drinks provided</p>
+          </div>
+
+          <div className="bg-fuchsia-50 rounded-xl p-4 mb-4 inline-block">
+            <QRCodeSVG
+              value={siteUrl}
+              size={180}
+              level="H"
+              fgColor="#86198f"
+              bgColor="transparent"
+            />
+          </div>
+
+          <p className="text-gray-500 text-xs">Scan to sign up</p>
+        </div>
       </div>
     );
   }

@@ -8,7 +8,7 @@ Volunteer signup app for the **Elite Core Cup Mardi Gras 2026** gymnastics event
 
 - Volunteer signup with live spot counter and progress bars (15 max per day)
 - Name validation before submission
-- Confirmation page with Google Calendar links, map directions, share link, and email reminder
+- Confirmation page with Google Calendar + iCal download, native maps directions, share link, and email reminder
 - Admin dashboard (password-protected) to view and manage signups
 - Firebase Realtime Database for persistence
 - Deployed to Vercel with auto-deploy on push
