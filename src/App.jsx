@@ -1,6 +1,28 @@
 import { useState, useEffect } from 'react';
 import { loadSignups, saveSignups } from './firebase';
 
+function downloadIcs(title, start, end, location, description) {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    `DTSTART:${start}`,
+    `DTEND:${end}`,
+    `SUMMARY:${title}`,
+    `LOCATION:${location}`,
+    `DESCRIPTION:${description}`,
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${title.replace(/\s+/g, '-')}.ics`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
 export default function App() {
   const [view, setView] = useState('signup');
   const [name, setName] = useState('');
@@ -211,27 +233,43 @@ export default function App() {
             {submittedDays.includes('thursday') && (
               <div className="bg-fuchsia-50 rounded-lg p-3">
                 <p className="text-fuchsia-700 font-medium mb-2">📅 Thursday, Feb 26 • 5-9 PM • SETUP</p>
-                <a
-                  href={thursdayCalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm bg-fuchsia-600 text-white px-3 py-1.5 rounded-full hover:bg-fuchsia-700"
-                >
-                  📆 Add to Calendar
-                </a>
+                <div className="flex gap-2">
+                  <a
+                    href={thursdayCalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm bg-fuchsia-600 text-white px-3 py-1.5 rounded-full hover:bg-fuchsia-700"
+                  >
+                    📆 Google Cal
+                  </a>
+                  <button
+                    onClick={() => downloadIcs('Elite Core Cup - SETUP Volunteer', '20260226T170000', '20260226T210000', 'Elite Core Gymnastics, 999 W Main St, West Dundee, IL 60118', 'Volunteer setup for Elite Core Cup Mardi Gras 2026. Bring your school community service form. Food & beverages provided!')}
+                    className="inline-flex items-center gap-1 text-sm bg-fuchsia-100 text-fuchsia-700 px-3 py-1.5 rounded-full hover:bg-fuchsia-200"
+                  >
+                    📅 iCal
+                  </button>
+                </div>
               </div>
             )}
             {submittedDays.includes('sunday') && (
               <div className="bg-violet-50 rounded-lg p-3">
                 <p className="text-violet-700 font-medium mb-2">📅 Sunday, Mar 1 • 6-9 PM • TAKEDOWN</p>
-                <a
-                  href={sundayCalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-sm bg-violet-600 text-white px-3 py-1.5 rounded-full hover:bg-violet-700"
-                >
-                  📆 Add to Calendar
-                </a>
+                <div className="flex gap-2">
+                  <a
+                    href={sundayCalUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm bg-violet-600 text-white px-3 py-1.5 rounded-full hover:bg-violet-700"
+                  >
+                    📆 Google Cal
+                  </a>
+                  <button
+                    onClick={() => downloadIcs('Elite Core Cup - TAKEDOWN Volunteer', '20260301T180000', '20260301T210000', 'Elite Core Gymnastics, 999 W Main St, West Dundee, IL 60118', 'Volunteer takedown for Elite Core Cup Mardi Gras 2026. Bring your school community service form. Food & beverages provided!')}
+                    className="inline-flex items-center gap-1 text-sm bg-violet-100 text-violet-700 px-3 py-1.5 rounded-full hover:bg-violet-200"
+                  >
+                    📅 iCal
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -241,12 +279,12 @@ export default function App() {
             <p className="text-gray-600 text-sm">Elite Core Gymnastics</p>
             <p className="text-gray-600 text-sm">999 W Main St, West Dundee, IL</p>
             <a
-              href="https://maps.google.com/?q=999+W+Main+St,+West+Dundee,+IL+60118"
+              href="https://maps.apple.com/?daddr=999+W+Main+St,+West+Dundee,+IL+60118"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm text-fuchsia-600 hover:text-fuchsia-800 mt-2"
             >
-              🗺️ Open in Maps
+              🗺️ Directions
             </a>
           </div>
 
@@ -255,6 +293,7 @@ export default function App() {
             <ul className="text-sm text-amber-700 space-y-1">
               <li>• Bring your school's community service form</li>
               <li>• Wear comfortable clothes, you may break a sweat</li>
+              <li>• Bring work gloves if you have them</li>
             </ul>
             <p className="text-sm text-amber-700 mt-2">🍕 Food & beverages provided!</p>
           </div>
@@ -327,6 +366,7 @@ export default function App() {
             <span className="bg-blue-400/20 text-blue-200 text-xs font-medium px-3 py-1.5 rounded-full">🥤 Drinks</span>
           </div>
           <p className="text-white/50 text-xs mt-2">* Bring your school's service hour form</p>
+          <p className="text-white/50 text-xs">* Bring work gloves if you have them</p>
         </div>
 
         {/* Day Selection */}
